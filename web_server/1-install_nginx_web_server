@@ -1,26 +1,7 @@
-#!/bin/bash
-
-# Update package list and install Nginx
-sudo apt-get update
-sudo apt-get install -y nginx
-
-# Create a new HTML file with the desired content
-echo "Holberton School for the win!" | sudo tee /var/www/html/index.html
-
-# Create a new default Nginx configuration
-sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    root /var/www/html;
-    index index.html;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-}
-EOF'
-
-# Restart Nginx
+#!/usr/bin/env bash
+# comment 
+sudo apt update
+sudo apt install nginx -y
+sudo touch /var/www/html/index.html
+echo "Holberton School" | sudo tee /var/www/html/index.html
 sudo service nginx restart
