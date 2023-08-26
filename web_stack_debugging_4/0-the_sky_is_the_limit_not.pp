@@ -1,7 +1,11 @@
-t nginx server setup
+# puppet file to debug nginx server
 
-exec { 'ULIMIT':
-  onlyif  => 'test -e /etc/default/nginx',
-  command => 'sed -i "5s/[0-9]\+/$( ulimit -n )/" /etc/default/nginx; service nginx restart',
-  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+exec { 'sed -i "s/15/4096/" /etc/default/nginx':
+  cwd  => '/root',
+  path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ],
+}
+
+exec { 'sudo service nginx restart':
+  cwd  => '/root',
+  path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ],
 }
